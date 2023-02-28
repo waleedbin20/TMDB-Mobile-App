@@ -1,4 +1,4 @@
-# movie_app
+# TMDB Movie App
 
 A new Flutter project.
 
