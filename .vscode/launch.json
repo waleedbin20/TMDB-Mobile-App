@@ -5,24 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "movie_app",
-            "cwd": "movie_app",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "movie_app (profile mode)",
-            "cwd": "movie_app",
+            "name": "main",
+            "cwd": "main",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "program": "lib/main.dart"
         },
         {
-            "name": "movie_app (release mode)",
-            "cwd": "movie_app",
+            "name": "main_dev",
+            "cwd": "main_dev",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "program": "lib/main_dev.dart"
         }
     ]
 }
