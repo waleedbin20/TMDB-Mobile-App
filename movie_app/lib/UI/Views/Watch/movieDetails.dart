@@ -30,9 +30,9 @@ class MovieDetailsView extends StatelessWidget {
       builder: (context, viewModel, _) => Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          title: const Text(
-            "Watch",
-            style: TextStyle(color: Colors.white),
+          title: Text(
+            movieDetails!.title!,
+            style: const TextStyle(color: Colors.white),
           ),
           backgroundColor: Colors.transparent,
           leading: const BackButton(
@@ -47,66 +47,78 @@ class MovieDetailsView extends StatelessWidget {
               decoration: BoxDecoration(
                   color: Colors.blue,
                   image: DecorationImage(
-                      image: new NetworkImage(''), fit: BoxFit.fill)),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const SizedBox(
-                      height: 150,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(movieDetails!.title!,
-                              style: TextStyle(color: Colors.white)),
+                      image: NetworkImage(movieDetails!.posterPath!),
+                      fit: BoxFit.fill)),
+              child: Stack(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.black.withOpacity(0.3),
+                          Colors.black.withOpacity(0.6),
                         ],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'RELEASE DATE',
-                            style: TextStyle(color: Colors.white),
-                          )
-                        ],
-                      ),
-                    ),
-                    Column(
+                  ),
+                  Center(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        MovieButton(
-                          inputText: 'Get Tickets',
-                          icon: const SizedBox(),
-                          onTap: () {},
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(237, 97, 196, 242),
-                              width: 2),
-                          backgroundColor:
-                              const Color.fromARGB(237, 97, 196, 242),
-                        ),
                         const SizedBox(
-                          height: 10,
+                          height: 150,
                         ),
-                        MovieButton(
-                          inputText: 'Watch Trailer',
-                          icon: const Icon(Icons.play_arrow_rounded),
-                          onTap: () {},
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(237, 97, 196, 242),
-                              width: 2),
-                          backgroundColor: Colors.transparent,
-                        )
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'In Theaters ${movieDetails!.releaseDate!}',
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                              )
+                            ],
+                          ),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            MovieButton(
+                              inputText: 'Get Tickets',
+                              icon: const SizedBox(),
+                              onTap: () {},
+                              borderSide: const BorderSide(
+                                  color: Color.fromARGB(237, 97, 196, 242),
+                                  width: 2),
+                              backgroundColor:
+                                  const Color.fromARGB(237, 97, 196, 242),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            MovieButton(
+                              inputText: 'Watch Trailer',
+                              icon: const Icon(Icons.play_arrow_rounded),
+                              onTap: () {
+                                viewModel.playVideo(movieDetails?.trailerId);
+                              },
+                              borderSide: const BorderSide(
+                                  color: Color.fromARGB(237, 97, 196, 242),
+                                  width: 2),
+                              backgroundColor: Colors.transparent,
+                            )
+                          ],
+                        ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             Container(
@@ -131,10 +143,7 @@ class MovieDetailsView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      BuildGenreChips(),
-                      BuildGenreChips(),
-                      BuildGenreChips(),
-                      BuildGenreChips(),
+                      BuildGenreChips(movieDetails!),
                     ],
                   ),
                   const SizedBox(
@@ -153,21 +162,21 @@ class MovieDetailsView extends StatelessWidget {
               height: 300,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     "Overview",
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 18,
                         fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(
-                    "defljldksjkljfkldjsklfjkdlsjfkldsj fdsjfdsjklfjds fdsjfl;jk dsofkosd;fdsdsfs f dsjkofkdos;kfods fdsfgdsjkfgdkso  dsojkfgodskjopgfdjs dsjfgdjsofgodpsjg fgdsfjdsopjds fofgdps dspojfgdopsjdspofgj dfsagdsjgpdsjpgsdj ",
-                    style: TextStyle(
-                        color: Colors.grey, fontSize: 12, height: 1.6),
+                    movieDetails!.overview!,
+                    style: const TextStyle(
+                        color: Colors.grey, fontSize: 13, height: 1.8),
                   ),
                 ],
               ),
@@ -178,23 +187,25 @@ class MovieDetailsView extends StatelessWidget {
     );
   }
 
-  Widget BuildGenreChips() {
+  Widget BuildGenreChips(MovieDetails movieDetails) {
     final Random random = Random();
 
     Color _getRandomColor() => Color.fromRGBO(
         random.nextInt(256), random.nextInt(256), random.nextInt(256), 1);
+
     return Wrap(
-      runSpacing: 1,
-      spacing: 2,
-      children: [
-        Chip(
-          labelPadding: const EdgeInsets.all(4),
-          label: const Text("Dummy"),
-          labelStyle:
-              const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-          backgroundColor: _getRandomColor(),
-        )
-      ],
+      runSpacing: 8,
+      spacing: 8,
+      children: movieDetails.genres?.map((genre) {
+            return Chip(
+              labelPadding: const EdgeInsets.all(4),
+              label: Text(genre.name ?? ""),
+              labelStyle: const TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.white),
+              backgroundColor: _getRandomColor(),
+            );
+          }).toList() ??
+          [],
     );
   }
 }

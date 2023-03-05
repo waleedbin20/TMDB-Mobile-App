@@ -33,7 +33,21 @@ class MovieService implements IMovieService {
 
     if (response.statusCode == 200) {
       _movieDetails = MovieDetails.fromJson(json.decode(response.body));
+      _movieDetails?.trailerId = (await getYouTubeId(movieId.toString()));
       return _movieDetails;
+    } else {
+      throw Exception("No Upcoming founds");
+    }
+  }
+
+  Future<String?> getYouTubeId(String movieId) async {
+    var path =
+        '${MovieApi.baseUrl}/movie/$movieId/videos?api_key=${MovieApi.apiKey}';
+    final response = await http.get(Uri.parse(path));
+
+    if (response.statusCode == 200) {
+      var youTubeId = json.decode(response.body);
+      return youTubeId['results'][0]['key'];
     } else {
       throw Exception("No Upcoming founds");
     }

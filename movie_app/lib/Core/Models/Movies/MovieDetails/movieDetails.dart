@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:movie_app/Core/Models/Movies/MovieDetails/Genre.dart';
+import 'package:movie_app/Core/Models/formattedMonthGenerator.dart';
 
 part 'movieDetails.g.dart';
 
@@ -20,17 +21,19 @@ class MovieDetails {
   String? title;
   bool? video;
 
-  MovieDetails({
-    this.homepage,
-    this.id,
-    this.imdbId,
-    this.originalLanguage,
-    this.originalTitle,
-    this.overview,
-    this.releaseDate,
-    this.title,
-    this.video,
-  });
+  String? trailerId;
+
+  MovieDetails(
+      {this.homepage,
+      this.id,
+      this.imdbId,
+      this.originalLanguage,
+      this.originalTitle,
+      this.overview,
+      this.releaseDate,
+      this.title,
+      this.video,
+      this.trailerId});
 
   factory MovieDetails.fromJson(Map<String, dynamic> json) =>
       _$MovieDetailsFromJson(json);

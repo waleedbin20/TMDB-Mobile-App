@@ -13,7 +13,10 @@ MovieDetails _$MovieDetailsFromJson(Map<String, dynamic> json) => MovieDetails(
       originalLanguage: json['original_language'] as String?,
       originalTitle: json['original_title'] as String?,
       overview: json['overview'] as String?,
-      releaseDate: json['release_date'] as String?,
+      releaseDate: json['release_date'] != null
+          ? FormattedMonthGenerator.getFormattedDate(
+              json['release_date'] as String)
+          : null,
       title: json['title'] as String?,
       video: json['video'] as bool?,
     )
