@@ -49,8 +49,11 @@ class Router {
           settings: settings,
         );
       case RoutePaths.search:
+        final navigationFlow = settings.arguments as NavigationFlow;
         return MaterialPageRoute<T>(
-          builder: (_) => const SearchView(),
+          builder: (_) => SearchView(
+            navigationFlow: navigationFlow,
+          ),
           settings: settings,
         );
       case RoutePaths.movieDetails:

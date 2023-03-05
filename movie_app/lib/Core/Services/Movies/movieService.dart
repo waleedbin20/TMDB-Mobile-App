@@ -66,15 +66,6 @@ class MovieService implements IMovieService {
     if (response.statusCode == 200) {
       searchMovieResult =
           MovieUpcomingModel.fromJson(json.decode(response.body));
-
-      // for (var movie in _searchResult!.result!) {
-      //   var getMovieInfo = await getMovieDetails(movie.id.toString());
-      //   if (getMovieInfo != null) {
-      //     movie.movieDetails = getMovieInfo;
-      //   } else {
-      //     throw Exception("No movie info found for the given id");
-      //   }
-      // }
       return searchMovieResult;
     } else {
       throw Exception("No movies found in the search result");

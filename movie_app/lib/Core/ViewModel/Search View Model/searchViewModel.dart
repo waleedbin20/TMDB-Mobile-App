@@ -34,7 +34,7 @@ class SearchViewModel extends ReactiveViewModel {
     await getSearchQuery(query);
     final arguments = Tuple2<MovieUpcomingModel?, NavigationFlow?>(
         _searchResult, NavigationFlow.Default);
-    await _navigationService.pushNamed(RoutePaths.movieDetails,
+    await _navigationService.pushNamed(RoutePaths.searchResult,
         arguments: arguments, navigationFlow: NavigationFlow.Default);
   }
 }

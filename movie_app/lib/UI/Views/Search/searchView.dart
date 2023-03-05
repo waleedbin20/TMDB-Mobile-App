@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_app/Core/Configs/enum.dart';
 import 'package:movie_app/Core/ViewModel/Search%20View%20Model/searchViewModel.dart';
 import 'package:movie_app/Core/ViewModel/Watch%20View%20Model/watchViewModel.dart';
 import 'package:movie_app/UI/Widgets/genreTile.dart';
@@ -9,11 +10,19 @@ import 'package:stacked/stacked.dart';
 import '../../../Core/Models/Genres.dart';
 
 class SearchView extends StatelessWidget {
-  const SearchView({Key? key}) : super(key: key);
+  const SearchView({Key? key, this.navigationFlow}) : super(key: key);
+
+  final NavigationFlow? navigationFlow;
 
   @override
   Widget build(BuildContext context) {
     final TextEditingController _searchController = TextEditingController();
+    FocusNode inputNode = FocusNode();
+
+    void openKeyboard() {
+      FocusScope.of(context).requestFocus(inputNode);
+    }
+
     return ViewModelBuilder<SearchViewModel>.reactive(
       viewModelBuilder: () => serviceLocator<SearchViewModel>(),
       builder: (context, viewmodel, _) => Scaffold(
@@ -27,13 +36,14 @@ class SearchView extends StatelessWidget {
           title: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Container(
-              width: 334,
               height: 52,
               decoration: BoxDecoration(
-                  color: Color.fromARGB(129, 219, 219, 223),
+                  color: const Color.fromARGB(129, 219, 219, 223),
                   borderRadius: BorderRadius.circular(30)),
               child: Center(
                 child: TextField(
+                  focusNode: inputNode,
+                  autofocus: true,
                   controller: _searchController,
                   decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.search),
@@ -44,7 +54,7 @@ class SearchView extends StatelessWidget {
                           Navigator.pop(context);
                         },
                       ),
-                      hintText: 'Search...',
+                      hintText: 'Tv Shown, movies and more',
                       border: InputBorder.none),
                   onSubmitted: (value) async {
                     await viewmodel.openSearchResultDetails(value);

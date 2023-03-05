@@ -42,6 +42,7 @@ class WatchViewModel extends ReactiveViewModel {
   }
 
   Future<void> openSearch() async {
-    await _navigationService.pushNamed(RoutePaths.search);
+    await _navigationService.pushNamed(RoutePaths.search,
+        arguments: NavigationFlow.Watch);
   }
 }
