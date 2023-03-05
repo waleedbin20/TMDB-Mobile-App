@@ -1,30 +1,38 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:movie_app/Core/Models/Movies/MovieDetails/movieDetails.dart';
+import 'package:movie_app/Core/Models/movieUpcomingModel.dart';
+import 'package:movie_app/Core/ViewModel/Search%20View%20Model/searchResultViewModel.dart';
 import 'package:movie_app/Core/ViewModel/Watch%20View%20Model/watchViewModel.dart';
 import 'package:movie_app/UI/serviceLocator.dart';
 import 'package:stacked/stacked.dart';
 
-class WatchView extends StatefulWidget {
-  const WatchView({Key? key}) : super(key: key);
+import '../../../Core/Configs/enum.dart';
 
-  @override
-  State<WatchView> createState() => _WatchViewState();
-}
+class SearchResultView extends StatelessWidget {
+  const SearchResultView({super.key, this.movieDetails, this.navigationFlow});
 
-class _WatchViewState extends State<WatchView> {
-  @override
+  final MovieUpcomingModel? movieDetails;
+  final NavigationFlow? navigationFlow;
+
   Widget build(BuildContext context) {
-    return ViewModelBuilder<WatchViewModel>.reactive(
-        viewModelBuilder: () => serviceLocator<WatchViewModel>(),
-        onViewModelReady: (viewmodel) => viewmodel.fetchMovies(),
+    return ViewModelBuilder<SearchResultViewModel>.reactive(
+        viewModelBuilder: () => serviceLocator<SearchResultViewModel>(),
+        onViewModelReady: (viewmodel) {
+          viewmodel.movies = movieDetails;
+        },
         builder: (context, viewmodel, _) => Scaffold(
               backgroundColor: const Color.fromARGB(0, 238, 238, 242),
               appBar: AppBar(
+                leading: const BackButton(
+                  color: Colors.black,
+                ),
                 toolbarHeight: 100,
                 title: const Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Text(
-                    'Watch',
+                    'Results Found',
                     style: TextStyle(color: Colors.black, fontSize: 25),
                   ),
                 ),
@@ -39,9 +47,7 @@ class _WatchViewState extends State<WatchView> {
                           Icons.search,
                           color: Colors.black,
                         ),
-                        onPressed: () async {
-                          viewmodel.openSearch();
-                        }),
+                        onPressed: () async {}),
                   )
                 ],
               ),
@@ -52,9 +58,6 @@ class _WatchViewState extends State<WatchView> {
                       itemBuilder: (movies, index) {
                         final movies = viewmodel.movies!.results![index];
                         return GestureDetector(
-                            onTap: () {
-                              viewmodel.openMovieDetails(movies.id.toString());
-                            },
                             child: makeMovieCard(
                                 title: movies.title,
                                 image: movies.backdropPath));

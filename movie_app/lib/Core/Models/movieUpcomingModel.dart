@@ -8,15 +8,12 @@ part 'movieUpcomingModel.g.dart';
 @JsonSerializable()
 class MovieUpcomingModel {
   List<Results>? results;
+  int? totalResult;
 
-  MovieUpcomingModel({
-    this.results,
-  });
+  MovieUpcomingModel({this.results, this.totalResult});
 
   factory MovieUpcomingModel.fromJson(Map<String, dynamic> json) =>
       _$MovieUpcomingModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$MovieUpcomingModelToJson(this);
-
-  
 }

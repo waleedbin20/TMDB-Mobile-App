@@ -5,8 +5,8 @@ import 'package:movie_app/Core/Models/movieUpcomingModel.dart';
 import 'package:movie_app/Core/Services/Movies/iMovieService.dart';
 import 'package:movie_app/Core/Services/Navigation/iNavigationService.dart';
 import 'package:stacked/stacked.dart';
-import 'package:tuple/tuple.dart';
-
+impor
+t 'package:tuple/tuple.dart';
 class WatchViewModel extends ReactiveViewModel {
   final IMovieService? _movieService;
   final INavigationService _navigationService;
@@ -39,5 +39,9 @@ class WatchViewModel extends ReactiveViewModel {
         _movieDetails, NavigationFlow.Default);
     await _navigationService.pushNamed(RoutePaths.movieDetails,
         arguments: arguments, navigationFlow: NavigationFlow.Default);
+  }
+
+  Future<void> openSearch() async {
+    await _navigationService.pushNamed(RoutePaths.search);
   }
 }
