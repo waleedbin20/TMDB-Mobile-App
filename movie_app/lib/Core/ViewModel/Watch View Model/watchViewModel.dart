@@ -5,8 +5,8 @@ import 'package:movie_app/Core/Models/movieUpcomingModel.dart';
 import 'package:movie_app/Core/Services/Movies/iMovieService.dart';
 import 'package:movie_app/Core/Services/Navigation/iNavigationService.dart';
 import 'package:stacked/stacked.dart';
-impor
-t 'package:tuple/tuple.dart';
+import 'package:tuple/tuple.dart';
+
 class WatchViewModel extends ReactiveViewModel {
   final IMovieService? _movieService;
   final INavigationService _navigationService;
