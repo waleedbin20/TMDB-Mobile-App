@@ -104,7 +104,7 @@ class Router {
                 settings: settings);
           } else {
             throw ArgumentError(
-                "Invalid argument type for movieDetails route.");
+                "Invalid argument type for Search Result route.");
           }
         }
 
