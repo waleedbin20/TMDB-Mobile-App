@@ -40,7 +40,7 @@ class NavigationService implements INavigationService {
   Map<NavigationFlow, GlobalKey<NavigatorState>> navigatorKeys = {
     NavigationFlow.Default: GlobalKey<NavigatorState>(),
     NavigationFlow.Watch: GlobalKey<NavigatorState>(),
-    NavigationFlow.Dashboard: GlobalKey<NavigatorState>(),
+    NavigationFlow.MediaLibrary: GlobalKey<NavigatorState>(),
     NavigationFlow.More: GlobalKey<NavigatorState>(),
   };
 

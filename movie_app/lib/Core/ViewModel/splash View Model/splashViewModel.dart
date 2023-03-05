@@ -6,7 +6,7 @@ import 'package:stacked/stacked.dart';
 class SplashViewModel extends FutureViewModel {
   @override
   Future<void> futureToRun() async {
-    Future.delayed(const Duration(seconds: 5))
+    Future.delayed(const Duration(seconds: 7))
         .then((value) => navigateToHome());
   }
 

@@ -1,4 +1,4 @@
-enum NavigationFlow { Default, Watch, Dashboard, More }
+enum NavigationFlow { Default, Watch, Dashboard, MediaLibrary, More }
 
 enum TabItem { Watch, Dashboard, More }
 

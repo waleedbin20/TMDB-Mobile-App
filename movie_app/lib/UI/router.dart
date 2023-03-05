@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/Core/Configs/enum.dart';
 import 'package:movie_app/Core/Configs/routePath.dart';
+import 'package:movie_app/Core/Models/Movies/MovieDetails/movieDetails.dart';
 import 'package:movie_app/UI/Views/Bottom%20Tab%20Bar/bottomTabBarView.dart';
+import 'package:movie_app/UI/Views/Dashboard/dashboardView.dart';
+import 'package:movie_app/UI/Views/Media%20Library/mediaView.dart';
 import 'package:movie_app/UI/Views/More/moreView.dart';
+import 'package:movie_app/UI/Views/Watch/movieDetails.dart';
 import 'package:movie_app/UI/Views/Watch/watchView.dart';
 import 'package:movie_app/UI/Views/splash/splashView.dart';
+import 'package:tuple/tuple.dart';
 
 class Router {
   static Route<T> generateRoute<T>(RouteSettings settings) {
@@ -24,26 +30,47 @@ class Router {
           builder: (_) => WatchView(),
           settings: settings,
         );
-
-      default:
-        return MaterialPageRoute<T>(
-          builder: (_) => Scaffold(
-            body: Center(
-              child: Text('No route defined for ${settings.name}'),
-            ),
-          ),
-          settings: settings,
-        );
-    }
-  }
-
-  static Route<T> generateRouteMore<T>(RouteSettings settings) {
-    switch (settings.name) {
       case RoutePaths.more:
         return MaterialPageRoute<T>(
-          builder: (_) => const Moreview(),
+          builder: (_) => const MoreView(),
           settings: settings,
         );
+      case RoutePaths.dashboard:
+        return MaterialPageRoute<T>(
+          builder: (_) => const DashboardView(),
+          settings: settings,
+        );
+      case RoutePaths.mediaLibrary:
+        return MaterialPageRoute<T>(
+          builder: (_) => const MediaView(),
+          settings: settings,
+        );
+      case RoutePaths.movieDetails:
+        {
+          final arguments = settings.arguments;
+          if (arguments is Tuple2<MovieDetails?, NavigationFlow?>) {
+            return MaterialPageRoute<T>(
+                builder: (_) => MovieDetailsView(
+                      movieDetails: arguments.item1,
+                      navigationFlow: arguments.item2,
+                    ),
+                settings: settings);
+          } else if (arguments is Tuple2<MovieDetails, NavigationFlow>) {
+            final movieDetails = arguments.item1;
+            final navigationFlow = arguments.item2;
+            final updatedArguments = Tuple2<MovieDetails?, NavigationFlow?>(
+                movieDetails, navigationFlow);
+            return MaterialPageRoute<T>(
+                builder: (_) => MovieDetailsView(
+                      movieDetails: updatedArguments.item1,
+                      navigationFlow: updatedArguments.item2,
+                    ),
+                settings: settings);
+          } else {
+            throw ArgumentError(
+                "Invalid argument type for movieDetails route.");
+          }
+        }
 
       default:
         return MaterialPageRoute<T>(
