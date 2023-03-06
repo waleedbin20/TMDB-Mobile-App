@@ -3,12 +3,12 @@
 This is a movies app developed in flutter
 
 
-## Features
-
-- Upcoming Movies
-- Movie Details
+## App Features
+- Search Functionality
+- Upcoming Movies Screen
+- Movie Details Screen
 - Genres
-- youtTube url
+- Watch Trailers
 
 ### Design 
 
@@ -20,28 +20,53 @@ The app is built on MVVM pattern and uses **stacked package**
 
 
 
-#### Packages 
-The following packages are used in the app 
+#### Packages used 
 
-  cupertino_icons: ^1.0.2
-  stacked: ^3.1.0+3
-  get_it: ^7.2.0
-  get: ^4.6.5
-  http: ^0.13.5
-  oauth2: ^2.0.1
-  provider: ^6.0.4
-  shared_preferences: ^2.0.15
-  json_annotation: ^4.7.0
-  font_awesome_flutter: ^10.3.0
-  app_settings: ^4.1.8
-  url_launcher: ^6.1.10
-  store_redirect: ^2.0.1
-  path_provider: ^2.0.11
-  intl: ^0.18.0
-  flutter_lints: ^2.0.0
-  build_runner: ^2.3.2
-  json_serializable: ^6.6.1
-  cached_network_image: ^3.2.3
-  tuple: ^2.0.1
+- cupertino_icons
+- stacked
+- get_it
+- get
+- http
+- oauth2
+- provider
+- shared_preferences
+- json_annotation
+- font_awesome_flutter
+- app_settings
+- url_launcher
+- store_redirect
+- path_provider
+- intl
+- flutter_lints
+- build_runner
+- json_serializable
+- cached_network_image
+- tuple
   
   
+
+#### How To Use
+
+Inside the project directory under Configs > MovieApiUrls: 
+
+Replace the API key with your key generated from TMDB
+
+<pre>
+```csharp
+// Here is an example C# program that prints "Hello, World!" to the console
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Hello, World!");
+    }
+}
+```
+</pre>
+API_KEY = "?api_key=<Your tmdb api key>"
+OMDB_API_KEY="<your ombd api key>"
+
+
+ 
