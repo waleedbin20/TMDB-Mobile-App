@@ -10,11 +10,11 @@ This is a movies app developed in flutter
 - Genres
 - Watch Trailers
 
-### Design 
+## Design 
 
 
 
-### Architecture 
+## Architecture 
 
 The app is built on MVVM pattern and uses **stacked package**
 
