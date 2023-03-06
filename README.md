@@ -52,21 +52,11 @@ Inside the project directory under Configs > MovieApiUrls:
 Replace the API key with your key generated from TMDB
 
 <pre>
-```csharp
-// Here is an example C# program that prints "Hello, World!" to the console
-using System;
-
-class Program
-{
-    static void Main(string[] args)
-    {
-        Console.WriteLine("Hello, World!");
-    }
-}
+```
+static const String baseUrl = "https://api.themoviedb.org/3";
+static const String apiKey = "<Add your API Key>";
 ```
 </pre>
-API_KEY = "?api_key=<Your tmdb api key>"
-OMDB_API_KEY="<your ombd api key>"
 
 
  
