@@ -52,10 +52,10 @@ Inside the project directory under Configs > MovieApiUrls:
 Replace the API key with your key generated from TMDB
 
 <pre>
-```
+
 static const String baseUrl = "https://api.themoviedb.org/3";
 static const String apiKey = "<Add your API Key>";
-```
+
 </pre>
 
 
