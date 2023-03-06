@@ -45,7 +45,7 @@ The app is built on MVVM pattern and uses **stacked package**
   
   
 
-#### How To Use
+## How To Use
 
 Inside the project directory under Configs > MovieApiUrls: 
 
