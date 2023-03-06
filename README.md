@@ -3,11 +3,11 @@
 This is a movies app developed in flutter
 
 
-# Features
+## Features
 
 - Upcoming Movies
 - Movie Details
 - Genres
 - youtTube url
 
-# Design 
+### Design 
